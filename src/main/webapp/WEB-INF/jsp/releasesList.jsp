@@ -1,16 +1,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<link rel="stylesheet" href="webjars/datatables/1.10.9/css/jquery.dataTables.css">
+<head>
+    <link rel="stylesheet" href="webjars/datatables/1.10.9/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/style.css">
+</head>
 <body>
-<h3>Список обновлений</h3>
+
+<div class="navbar" role="navigation">
+    <div class="container">
+            <a class="navbar-brand">Release registry</a>
+        <div class="header-actions" role="navigation">
+            <a class="btn btn-primary" href="/join?source=header-home">Sign up</a>
+            <a class="btn" href="/login">Sign in</a>
+        </div>
+    </div>
+</div>
 
 <div class="view-box">
     <table class="table table-striped display" id="datatable">
         <thead>
         <tr>
-            <th>Выпущено</th>
-            <th>Наименование</th>
-            <th>Адрес</th>
+            <th>Released</th>
+            <th>Name</th>
+            <th>URL</th>
         </tr>
         </thead>
     </table>
