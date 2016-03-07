@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -25,7 +24,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ru.empyros.releases.Profiles.POSTGRES;
 import static ru.empyros.web.ReleasesTestData.RELEASE1_ID;
 import static ru.empyros.web.ReleasesTestData.RELEASE_161;
 
@@ -34,7 +32,6 @@ import static ru.empyros.web.ReleasesTestData.RELEASE_161;
         "classpath:spring/spring-mvc.xml"
 })
 @WebAppConfiguration
-@ActiveProfiles(POSTGRES)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ReleasesRestControllerTest {
 

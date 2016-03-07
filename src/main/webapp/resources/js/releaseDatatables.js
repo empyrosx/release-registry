@@ -9,9 +9,9 @@ $(function () {
         },
         "paging": false,
         "info": false,
-        /*"language": {
+        "language": {
             "search": "Поиск:"
-        },*/
+        },
         "columns": [
             {
                 "data": "released"
