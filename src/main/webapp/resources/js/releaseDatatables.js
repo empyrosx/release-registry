@@ -1,4 +1,4 @@
-var ajaxUrl = 'rest/releases';
+var ajaxUrl = 'rest/releases/';
 var datatableApi;
 
 $(function () {
@@ -22,6 +22,25 @@ $(function () {
             {
                 "data": "url"
             }
+        ],
+        "order": [
+            [
+                0,
+                "desc"
+            ]
         ]
     });
+    makeEditable();
 });
+
+function updateTable() {
+    $.ajax({
+        type: "GET",
+        url: ajaxUrl,
+        //data: $('#filter').serialize(),
+        success: function (data) {
+            updateTableByData(data);
+        }
+    });
+    return false;
+}
