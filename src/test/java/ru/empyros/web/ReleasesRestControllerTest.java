@@ -31,7 +31,8 @@ import static ru.empyros.web.ReleasesTestData.RELEASE_161;
 
 @ContextConfiguration({
         "classpath:spring/spring-config.xml",
-        "classpath:spring/spring-mvc.xml"
+        "classpath:spring/spring-mvc.xml",
+        "classpath:spring/spring-db.xml"
 })
 @WebAppConfiguration
 @ActiveProfiles(HSQLDB)

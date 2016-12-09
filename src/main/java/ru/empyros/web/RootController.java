@@ -13,7 +13,7 @@ public class RootController {
     }
 
     @RequestMapping(value = "/releases",method = RequestMethod.GET)
-    public String mealList() {
+    public String releasesList() {
         return "releasesList";
     }
 }
