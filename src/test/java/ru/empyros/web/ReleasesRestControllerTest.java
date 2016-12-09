@@ -1,5 +1,8 @@
 package ru.empyros.web;
 
+import java.util.List;
+import javax.annotation.PostConstruct;
+
 import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,16 +19,13 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import ru.empyros.model.Release;
 import ru.empyros.service.ReleasesService;
 
-import javax.annotation.PostConstruct;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ru.empyros.releases.Profiles.POSTGRES;
+import static ru.empyros.releases.Profiles.HSQLDB;
 import static ru.empyros.web.ReleasesTestData.RELEASE1_ID;
 import static ru.empyros.web.ReleasesTestData.RELEASE_161;
 
@@ -34,7 +34,7 @@ import static ru.empyros.web.ReleasesTestData.RELEASE_161;
         "classpath:spring/spring-mvc.xml"
 })
 @WebAppConfiguration
-@ActiveProfiles(POSTGRES)
+@ActiveProfiles(HSQLDB)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ReleasesRestControllerTest {
 
@@ -47,13 +47,19 @@ public class ReleasesRestControllerTest {
         CHARACTER_ENCODING_FILTER.setForceEncoding(true);
     }
 
+    @Autowired
+    WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
-
     @Autowired
     private ReleasesService service;
 
-    @Autowired
-    WebApplicationContext webApplicationContext;
+    private static Release jsonConverter(String json) {
+        return JsonUtil.readValue(json, Release.class);
+    }
+
+    private static List<Release> jsonListConverter(String json) {
+        return JsonUtil.readValues(json, Release.class);
+    }
 
     @PostConstruct
     void postConstruct() {
@@ -100,13 +106,5 @@ public class ReleasesRestControllerTest {
     private Matcher<String> getListMatcher(List<Release> expected) {
         return Matchers.listMatcher(expected
                 , ReleasesRestControllerTest::jsonListConverter, Release::toString);
-    }
-
-    private static Release jsonConverter(String json) {
-        return JsonUtil.readValue(json, Release.class);
-    }
-
-    private static List<Release> jsonListConverter(String json) {
-        return JsonUtil.readValues(json, Release.class);
     }
 }
